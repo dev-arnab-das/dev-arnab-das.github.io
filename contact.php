@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // ── Configuration ──────────────────────────────
-define('RECIPIENT_EMAIL', 'arnabdas@email.com');   // <-- Change to your email
+define('RECIPIENT_EMAIL', 'arnabdas.web2004@gmail.com');   // <-- Change to your email
 define('RECIPIENT_NAME',  'Arnab Das');
 define('SITE_NAME',       'Arnab Das Portfolio');
 // ──────────────────────────────────────────────
@@ -106,7 +106,7 @@ $htmlBody = <<<HTML
     <div class="row"><div class="label">Subject</div><div class="value">{$subject}</div></div>
     <div class="msg-box">{$message}</div>
   </div>
-  <div class="footer">Sent via arnabdas.com portfolio contact form</div>
+  <div class="footer">Sent via dev-arnab-das.github.io portfolio contact form</div>
 </div>
 </body></html>
 HTML;
@@ -115,7 +115,7 @@ HTML;
 $boundary = md5(time());
 $headers  = "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: multipart/alternative; boundary=\"{$boundary}\"\r\n";
-$headers .= "From: {$name} <noreply@arnabdas.com>\r\n";
+$headers .= "From: {$name} <noreply@dev-arnab-das.github.io>\r\n";
 $headers .= "Reply-To: {$name} <{$email}>\r\n";
 $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 $headers .= "X-Priority: 1\r\n";
@@ -141,13 +141,13 @@ Your message: "{$subject}"
 Best regards,
 Arnab Das
 Creative Web Developer & WordPress Expert
-📧 arnabdas@email.com
-📱 +91 98765 43210
-🌐 arnabdas.com
+📧 arnabdas.web2004@gmail.com
+📱 +91 87776 71828
+🌐 https://dev-arnab-das.github.io/
 TEXT;
 
-$autoHeaders  = "From: Arnab Das <arnabdas@email.com>\r\n";
-$autoHeaders .= "Reply-To: arnabdas@email.com\r\n";
+$autoHeaders  = "From: Arnab Das <arnabdas.web2004@gmail.com>\r\n";
+$autoHeaders .= "Reply-To: arnabdas.web2004@gmail.com\r\n";
 $autoHeaders .= "Content-Type: text/plain; charset=UTF-8\r\n";
 @mail($email, $autoReplySubject, $autoReplyBody, $autoHeaders);
 
