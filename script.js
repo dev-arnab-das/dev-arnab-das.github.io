@@ -586,7 +586,7 @@ $(function () {
   ];
   const wg = $("#why-grid");
   whyItems.forEach((w, i) => {
-    wg.append(`<div class="col-6 col-md-3 col-sm-12" data-aos="fade-up" data-aos-delay="${(i % 4) * 70}">
+    wg.append(`<div class="col-12 col-md-3" data-aos="fade-up" data-aos-delay="${(i % 4) * 70}">
     <div class="glass-card why-card h-100">
       <div class="why-icon"><i class="${w.icon}" style="color:var(--accent-1)"></i></div>
       <div class="why-title">${w.title}</div>
