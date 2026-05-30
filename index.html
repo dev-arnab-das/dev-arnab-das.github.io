@@ -2018,7 +2018,6 @@
             <div class="glass-card p-4">
               <form
                 id="contact-form"
-                action="contact.php"
                 method="POST"
                 novalidate
               >
@@ -2223,6 +2222,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+emailjs.init("5JmBjc8lqf--c7vmj");
+</script>
 
     <script>
       $(function () {
@@ -2896,60 +2900,80 @@
         });
 
         /* ---- Contact form (AJAX) ---- */
-        $("#contact-form").on("submit", function (e) {
-          e.preventDefault();
-          const name = $("#f-name").val().trim();
-          const email = $("#f-email").val().trim();
-          const msg = $("#f-message").val().trim();
-          const subj = $("#f-subject").val().trim();
-          let valid = true;
-          if (!name) {
-            $("#f-name").addClass("is-invalid");
-            valid = false;
-          } else {
-            $("#f-name").removeClass("is-invalid");
-          }
-          if (!email || !email.includes("@")) {
-            $("#f-email").addClass("is-invalid");
-            valid = false;
-          } else {
-            $("#f-email").removeClass("is-invalid");
-          }
-          if (!msg) {
-            $("#f-message").addClass("is-invalid");
-            valid = false;
-          } else {
-            $("#f-message").removeClass("is-invalid");
-          }
-          if (!valid) return;
+        /* ---- Contact form ---- */
+$("#contact-form").on("submit", function (e) {
+  e.preventDefault();
 
-          const btn = $("#submit-btn");
-          btn
-            .html('<i class="fas fa-spinner fa-spin"></i> Sending...')
-            .prop("disabled", true);
+  const name = $("#f-name").val().trim();
+  const email = $("#f-email").val().trim();
+  const msg = $("#f-message").val().trim();
+  const subj = $("#f-subject").val().trim();
 
-          $.ajax({
-            url: "contact.php",
-            type: "POST",
-            data: $(this).serialize(),
-            success: function () {
-              $("#form-success").show();
-              $("#form-error").hide();
-              $("#contact-form")[0].reset();
-              btn
-                .html('<i class="fas fa-paper-plane"></i> Send Message')
-                .prop("disabled", false);
-              setTimeout(() => $("#form-success").fadeOut(), 5000);
-            },
-            error: function () {
-              $("#form-error").show();
-              $("#form-success").hide();
-              btn
-                .html('<i class="fas fa-paper-plane"></i> Send Message')
-                .prop("disabled", false);
-            },
-          });
-        });
+  let valid = true;
+
+  if (!name) {
+    $("#f-name").addClass("is-invalid");
+    valid = false;
+  } else {
+    $("#f-name").removeClass("is-invalid");
+  }
+
+  if (!email || !email.includes("@")) {
+    $("#f-email").addClass("is-invalid");
+    valid = false;
+  } else {
+    $("#f-email").removeClass("is-invalid");
+  }
+
+  if (!msg) {
+    $("#f-message").addClass("is-invalid");
+    valid = false;
+  } else {
+    $("#f-message").removeClass("is-invalid");
+  }
+
+  if (!valid) return;
+
+  const btn = $("#submit-btn");
+
+  btn
+    .html('<i class="fas fa-spinner fa-spin"></i> Sending...')
+    .prop("disabled", true);
+    emailjs.send("service_wp4fpn3", "template_yi9hnfm", {
+  name: name,
+  email: email,
+  subject: subj,
+  phone: $("input[name='phone']").val(),
+  service: $("input[name='service']").val(),
+  message: msg,
+});
+  .then(function () {
+
+    $("#form-success").show();
+    $("#form-error").hide();
+
+    $("#contact-form")[0].reset();
+
+    btn
+      .html('<i class="fas fa-paper-plane"></i> Send Message')
+      .prop("disabled", false);
+
+    setTimeout(() => $("#form-success").fadeOut(), 5000);
+
+  })
+  .catch(function (error) {
+
+    console.log(error);
+
+    $("#form-error").show();
+    $("#form-success").hide();
+
+    btn
+      .html('<i class="fas fa-paper-plane"></i> Send Message')
+      .prop("disabled", false);
+
+  });
+});
 
         /* ---- Smooth scroll ---- */
         $(document).on("click", 'a[href^="#"]', function (e) {
