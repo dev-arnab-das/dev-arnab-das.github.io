@@ -2899,9 +2899,7 @@ emailjs.init("5JmBjc8lqf--c7vmj");
           );
         });
 
-        /* ---- Contact form (AJAX) ---- */
-        /* ---- Contact form ---- */
-$("#contact-form").on("submit", function (e) {
+       $("#contact-form").on("submit", function (e) {
   e.preventDefault();
 
   const name = $("#f-name").val().trim();
@@ -2939,15 +2937,22 @@ $("#contact-form").on("submit", function (e) {
   btn
     .html('<i class="fas fa-spinner fa-spin"></i> Sending...')
     .prop("disabled", true);
-    emailjs.send("service_wp4fpn3", "template_yi9hnfm", {
-  name: name,
-  email: email,
-  subject: subj,
-  phone: $("input[name='phone']").val(),
-  service: $("input[name='service']").val(),
-  message: msg,
-});
-  .then(function () {
+
+  emailjs.send(
+    "service_wp4fpn3",
+    "template_yi9hnfm",
+    {
+      name: name,
+      email: email,
+      subject: subj,
+      phone: $("input[name='phone']").val(),
+      service: $("input[name='service']").val(),
+      message: msg
+    }
+  )
+  .then(function (response) {
+
+    console.log("SUCCESS!", response);
 
     $("#form-success").show();
     $("#form-error").hide();
@@ -2958,12 +2963,14 @@ $("#contact-form").on("submit", function (e) {
       .html('<i class="fas fa-paper-plane"></i> Send Message')
       .prop("disabled", false);
 
-    setTimeout(() => $("#form-success").fadeOut(), 5000);
+    setTimeout(() => {
+      $("#form-success").fadeOut();
+    }, 5000);
 
   })
   .catch(function (error) {
 
-    console.log(error);
+    console.error("FAILED...", error);
 
     $("#form-error").show();
     $("#form-success").hide();
@@ -2973,6 +2980,7 @@ $("#contact-form").on("submit", function (e) {
       .prop("disabled", false);
 
   });
+
 });
 
         /* ---- Smooth scroll ---- */
