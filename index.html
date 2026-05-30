@@ -1807,7 +1807,7 @@
             <div class="row g-3">
               <div class="col-6">
                 <div class="glass-card about-stat">
-                  <span class="stat-number" data-target="3">0</span>
+                  <span class="stat-number" data-target="6">0</span>
                   <span class="stat-label">Years Experience</span>
                 </div>
               </div>
@@ -2016,11 +2016,7 @@
           </div>
           <div class="col-lg-7" data-aos="fade-left">
             <div class="glass-card p-4">
-              <form
-                id="contact-form"
-                method="POST"
-                novalidate
-              >
+              <form id="contact-form" method="POST" novalidate>
                 <div class="row g-3">
                   <div class="col-md-6">
                     <input
@@ -2225,8 +2221,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-emailjs.init("5JmBjc8lqf--c7vmj");
-</script>
+      emailjs.init("5JmBjc8lqf--c7vmj");
+    </script>
 
     <script>
       $(function () {
@@ -2898,111 +2894,100 @@ emailjs.init("5JmBjc8lqf--c7vmj");
             `<div class="dot${i === 0 ? " active" : ""}" data-i="${i}"></div>`,
           );
         });
-/* ---- Contact From Submit ---- */
-       $(document).ready(function () {
+        /* ---- Contact From Submit ---- */
+        $(document).ready(function () {
+          $("#contact-form").on("submit", function (e) {
+            e.preventDefault();
 
-  $("#contact-form").on("submit", function (e) {
+            const name = $("#f-name").val().trim();
+            const email = $("#f-email").val().trim();
+            const subject = $("#f-subject").val().trim();
+            const message = $("#f-message").val().trim();
+            const phone = $("input[name='phone']").val().trim();
+            const service = $("input[name='service']").val().trim();
 
-    e.preventDefault();
+            let valid = true;
 
-    const name = $("#f-name").val().trim();
-    const email = $("#f-email").val().trim();
-    const subject = $("#f-subject").val().trim();
-    const message = $("#f-message").val().trim();
-    const phone = $("input[name='phone']").val().trim();
-    const service = $("input[name='service']").val().trim();
+            // Name validation
+            if (!name) {
+              $("#f-name").addClass("is-invalid");
+              valid = false;
+            } else {
+              $("#f-name").removeClass("is-invalid");
+            }
 
-    let valid = true;
+            // Email validation
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+              $("#f-email").addClass("is-invalid");
+              valid = false;
+            } else {
+              $("#f-email").removeClass("is-invalid");
+            }
 
-    // Name validation
-    if (!name) {
-      $("#f-name").addClass("is-invalid");
-      valid = false;
-    } else {
-      $("#f-name").removeClass("is-invalid");
-    }
+            // Subject validation
+            if (!subject) {
+              $("#f-subject").addClass("is-invalid");
+              valid = false;
+            } else {
+              $("#f-subject").removeClass("is-invalid");
+            }
 
-    // Email validation
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      $("#f-email").addClass("is-invalid");
-      valid = false;
-    } else {
-      $("#f-email").removeClass("is-invalid");
-    }
+            // Message validation
+            if (!message) {
+              $("#f-message").addClass("is-invalid");
+              valid = false;
+            } else {
+              $("#f-message").removeClass("is-invalid");
+            }
 
-    // Subject validation
-    if (!subject) {
-      $("#f-subject").addClass("is-invalid");
-      valid = false;
-    } else {
-      $("#f-subject").removeClass("is-invalid");
-    }
+            if (!valid) {
+              return;
+            }
 
-    // Message validation
-    if (!message) {
-      $("#f-message").addClass("is-invalid");
-      valid = false;
-    } else {
-      $("#f-message").removeClass("is-invalid");
-    }
+            const btn = $("#submit-btn");
 
-    if (!valid) {
-      return;
-    }
+            btn
+              .html('<i class="fas fa-spinner fa-spin"></i> Sending...')
+              .prop("disabled", true);
 
-    const btn = $("#submit-btn");
+            emailjs
+              .send("service_wp4fpn3", "template_yi9hnfm", {
+                name: name,
+                email: email,
+                subject: subject,
+                phone: phone,
+                service: service,
+                message: message,
+                time: new Date().toLocaleString(),
+              })
+              .then(function (response) {
+                console.log("SUCCESS!", response);
 
-    btn
-      .html('<i class="fas fa-spinner fa-spin"></i> Sending...')
-      .prop("disabled", true);
+                $("#form-success").show();
+                $("#form-error").hide();
 
-    emailjs.send(
-      "service_wp4fpn3",
-      "template_yi9hnfm",
-      {
-        name: name,
-        email: email,
-        subject: subject,
-        phone: phone,
-        service: service,
-        message: message,
-        time: new Date().toLocaleString()
-      }
-    )
-    .then(function (response) {
+                $("#contact-form")[0].reset();
 
-      console.log("SUCCESS!", response);
+                btn
+                  .html('<i class="fas fa-paper-plane"></i> Send Message')
+                  .prop("disabled", false);
 
-      $("#form-success").show();
-      $("#form-error").hide();
+                setTimeout(function () {
+                  $("#form-success").fadeOut();
+                }, 5000);
+              })
+              .catch(function (error) {
+                console.error("FAILED...", error);
 
-      $("#contact-form")[0].reset();
+                $("#form-error").show();
+                $("#form-success").hide();
 
-      btn
-        .html('<i class="fas fa-paper-plane"></i> Send Message')
-        .prop("disabled", false);
-
-      setTimeout(function () {
-        $("#form-success").fadeOut();
-      }, 5000);
-
-    })
-    .catch(function (error) {
-
-      console.error("FAILED...", error);
-
-      $("#form-error").show();
-      $("#form-success").hide();
-
-      btn
-        .html('<i class="fas fa-paper-plane"></i> Send Message')
-        .prop("disabled", false);
-
-    });
-
-  });
-
-});
+                btn
+                  .html('<i class="fas fa-paper-plane"></i> Send Message')
+                  .prop("disabled", false);
+              });
+          });
+        });
         /* ---- Contact From Submit ---- */
 
         /* ---- Smooth scroll ---- */
