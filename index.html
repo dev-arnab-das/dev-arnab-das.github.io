@@ -2899,85 +2899,106 @@ emailjs.init("5JmBjc8lqf--c7vmj");
           );
         });
 
-       $("#contact-form").on("submit", function (e) {
-  e.preventDefault();
+       $(document).ready(function () {
 
-  const name = $("#f-name").val().trim();
-  const email = $("#f-email").val().trim();
-  const msg = $("#f-message").val().trim();
-  const subj = $("#f-subject").val().trim();
+  $("#contact-form").on("submit", function (e) {
 
-  let valid = true;
+    e.preventDefault();
 
-  if (!name) {
-    $("#f-name").addClass("is-invalid");
-    valid = false;
-  } else {
-    $("#f-name").removeClass("is-invalid");
-  }
+    const name = $("#f-name").val().trim();
+    const email = $("#f-email").val().trim();
+    const subject = $("#f-subject").val().trim();
+    const message = $("#f-message").val().trim();
+    const phone = $("input[name='phone']").val().trim();
+    const service = $("input[name='service']").val().trim();
 
-  if (!email || !email.includes("@")) {
-    $("#f-email").addClass("is-invalid");
-    valid = false;
-  } else {
-    $("#f-email").removeClass("is-invalid");
-  }
+    let valid = true;
 
-  if (!msg) {
-    $("#f-message").addClass("is-invalid");
-    valid = false;
-  } else {
-    $("#f-message").removeClass("is-invalid");
-  }
-
-  if (!valid) return;
-
-  const btn = $("#submit-btn");
-
-  btn
-    .html('<i class="fas fa-spinner fa-spin"></i> Sending...')
-    .prop("disabled", true);
-
-  emailjs.send(
-    "service_wp4fpn3",
-    "template_yi9hnfm",
-    {
-      name: name,
-      email: email,
-      subject: subj,
-      phone: $("input[name='phone']").val(),
-      service: $("input[name='service']").val(),
-      message: msg
+    // Name validation
+    if (!name) {
+      $("#f-name").addClass("is-invalid");
+      valid = false;
+    } else {
+      $("#f-name").removeClass("is-invalid");
     }
-  )
-  .then(function (response) {
 
-    console.log("SUCCESS!", response);
+    // Email validation
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      $("#f-email").addClass("is-invalid");
+      valid = false;
+    } else {
+      $("#f-email").removeClass("is-invalid");
+    }
 
-    $("#form-success").show();
-    $("#form-error").hide();
+    // Subject validation
+    if (!subject) {
+      $("#f-subject").addClass("is-invalid");
+      valid = false;
+    } else {
+      $("#f-subject").removeClass("is-invalid");
+    }
 
-    $("#contact-form")[0].reset();
+    // Message validation
+    if (!message) {
+      $("#f-message").addClass("is-invalid");
+      valid = false;
+    } else {
+      $("#f-message").removeClass("is-invalid");
+    }
+
+    if (!valid) {
+      return;
+    }
+
+    const btn = $("#submit-btn");
 
     btn
-      .html('<i class="fas fa-paper-plane"></i> Send Message')
-      .prop("disabled", false);
+      .html('<i class="fas fa-spinner fa-spin"></i> Sending...')
+      .prop("disabled", true);
 
-    setTimeout(() => {
-      $("#form-success").fadeOut();
-    }, 5000);
+    emailjs.send(
+      "service_wp4fpn3",
+      "template_yi9hnfm",
+      {
+        name: name,
+        email: email,
+        subject: subject,
+        phone: phone,
+        service: service,
+        message: message,
+        time: new Date().toLocaleString()
+      }
+    )
+    .then(function (response) {
 
-  })
-  .catch(function (error) {
+      console.log("SUCCESS!", response);
 
-    console.error("FAILED...", error);
+      $("#form-success").show();
+      $("#form-error").hide();
 
-    $("#form-error").show();
-    $("#form-success").hide();
+      $("#contact-form")[0].reset();
 
-    btn
-      .html('<i class="fas fa-paper-plane"></i> Send Message')
-      .prop("disabled", false);
+      btn
+        .html('<i class="fas fa-paper-plane"></i> Send Message')
+        .prop("disabled", false);
+
+      setTimeout(function () {
+        $("#form-success").fadeOut();
+      }, 5000);
+
+    })
+    .catch(function (error) {
+
+      console.error("FAILED...", error);
+
+      $("#form-error").show();
+      $("#form-success").hide();
+
+      btn
+        .html('<i class="fas fa-paper-plane"></i> Send Message')
+        .prop("disabled", false);
+
+    });
 
   });
 
