@@ -463,12 +463,12 @@ $(function () {
     },
 
     {
-      image: "images/ecommerce.jpg",
-      title: "Ecommerce Website",
-      desc: "Full-featured ecommerce store with product pages and secure checkout.",
-      tags: ["WooCommerce", "PHP", "jQuery"],
-      cat: "ecommerce",
-      link: "https://example.com",
+      image: "images/Hindterminals.webp",
+      title: "Hindterminals",
+      desc: "Professional logistics website designed for freight management, transportation services, and seamless shipment tracking.",
+      tags: ["HTML", "CSS", "BOOTSTRAP", "JAVASCRIPT", "JQUERY"],
+      cat: "frontend",
+      link: "https://www.hindterminals.com/",
     },
 
     {
