@@ -472,21 +472,30 @@ $(function () {
     },
 
     {
-      image: "images/shopify.jpg",
-      title: "Shopify Store",
-      desc: "Premium Shopify store with custom UI and conversion-focused design.",
-      tags: ["Shopify", "Liquid", "JavaScript"],
-      cat: "ecommerce",
-      link: "https://example.com",
+      image: "images/Chemist-Nearme.webp",
+      title: "Chemist Nearme",
+      desc: "Modern pharmacy website offering healthcare products, medicine information, and seamless online ordering services.",
+      tags: ["HTML", "CSS", "BOOTSTRAP", "JAVASCRIPT", "JQUERY"],
+      cat: ["ecommerce", "frontend"],
+      link: "https://projects.synergynexa.com/chemist-nearme/",
     },
 
     {
-      image: "images/portfolio.jpg",
-      title: "Business Portfolio",
-      desc: "Corporate portfolio website with services, testimonials and animations.",
-      tags: ["HTML5", "CSS3", "Bootstrap"],
+      image: "images/sinclus.webp",
+      title: "sinclus",
+      desc: "Professional engineering, consulting, and marketing service website showcasing innovative business solutions, strategic planning, and digital growth services.",
+      tags: ["HTML5", "CSS3"],
       cat: "frontend",
-      link: "https://example.com",
+      link: "https://projects.synergynexa.com/sinclus/",
+    },
+
+    {
+      image: "images/FIP.webp",
+      title: "FIP",
+      desc: "Professional pilot training website offering aviation courses, flight programs, and modern learning solutions for aspiring pilots.",
+      tags: ["HTML", "CSS", "BOOTSTRAP", "JAVASCRIPT", "JQUERY"],
+      cat: "frontend",
+      link: "https://fip.synergynexa.com/",
     },
   ];
 
