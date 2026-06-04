@@ -500,9 +500,9 @@ $(function () {
     pGrid.append(`
 
     <div class="col-md-6 col-lg-4 project-item" 
-         data-cat="${p.cat}" 
-         data-aos="fade-up"
-         data-aos-delay="${i * 80}">
+     data-cat="${Array.isArray(p.cat) ? p.cat.join(" ") : p.cat}"
+     data-aos="fade-up"
+     data-aos-delay="${i * 80}">
 
       <a href="${p.link}" 
          target="_blank" 
@@ -547,20 +547,21 @@ $(function () {
    FILTER PROJECTS
 ========================= */
 
-  $(document).on("click", ".filter-btn", function () {
+  $(".filter-btn").click(function () {
     $(".filter-btn").removeClass("active");
-
     $(this).addClass("active");
 
     const filter = $(this).data("filter");
 
-    if (filter === "all") {
-      $(".project-item").fadeIn();
-    } else {
-      $(".project-item").hide();
+    $(".project-item").each(function () {
+      const categories = $(this).data("cat").split(" ");
 
-      $('.project-item[data-cat="' + filter + '"]').fadeIn();
-    }
+      if (filter === "all" || categories.includes(filter)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
   });
 
   /* ---- Why choose me ---- */
