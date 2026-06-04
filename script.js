@@ -430,114 +430,136 @@ $(function () {
   });
 
   /* ---- Projects data ---- */
+  /* =========================
+   PROJECT DATA
+========================= */
+
   const projects = [
     {
-      emoji: "🎓",
+      image: "images/lms.jpg",
       title: "LMS Website",
       desc: "Feature-rich Learning Management System with courses, quizzes, and student dashboards.",
       tags: ["WordPress", "LearnDash", "PHP"],
       cat: "wordpress",
+      link: "https://example.com",
     },
+
     {
-      emoji: "🏨",
+      image: "images/hotel.jpg",
       title: "Hotel Booking Website",
-      desc: "Elegant hotel booking platform with real-time availability, reservations, and payment integration.",
-      tags: ["WordPress", "PHP", "Bootstrap"],
+      desc: "Elegant hotel booking platform with real-time availability and reservations.",
+      tags: ["WordPress", "Bootstrap", "PHP"],
       cat: "wordpress",
+      link: "https://example.com",
     },
+
     {
-      emoji: "✈️",
-      title: "Travel & Tourism Website",
-      desc: "Visually stunning travel website with tour packages, destination guides, and booking forms.",
-      tags: ["WordPress", "Elementor", "SEO"],
+      image: "images/travel.jpg",
+      title: "Travel Website",
+      desc: "Modern tourism website with packages, galleries and inquiry forms.",
+      tags: ["Elementor", "SEO", "WordPress"],
       cat: "wordpress",
+      link: "https://example.com",
     },
+
     {
-      emoji: "🛒",
+      image: "images/ecommerce.jpg",
       title: "Ecommerce Website",
-      desc: "Full-featured ecommerce store with product catalog, cart, checkout, and order management.",
+      desc: "Full-featured ecommerce store with product pages and secure checkout.",
       tags: ["WooCommerce", "PHP", "jQuery"],
       cat: "ecommerce",
+      link: "https://example.com",
     },
+
     {
-      emoji: "🏪",
-      title: "WooCommerce Store",
-      desc: "Custom WooCommerce store with advanced product filtering, reviews, and payment gateways.",
-      tags: ["WooCommerce", "WordPress", "CSS3"],
-      cat: "ecommerce",
-    },
-    {
-      emoji: "🛍️",
+      image: "images/shopify.jpg",
       title: "Shopify Store",
-      desc: "Premium Shopify store with custom theme development and conversion optimization.",
+      desc: "Premium Shopify store with custom UI and conversion-focused design.",
       tags: ["Shopify", "Liquid", "JavaScript"],
       cat: "ecommerce",
+      link: "https://example.com",
     },
+
     {
-      emoji: "💼",
+      image: "images/portfolio.jpg",
       title: "Business Portfolio",
-      desc: "Premium corporate portfolio website with team pages, services, and case studies.",
+      desc: "Corporate portfolio website with services, testimonials and animations.",
       tags: ["HTML5", "CSS3", "Bootstrap"],
       cat: "frontend",
-    },
-    {
-      emoji: "📅",
-      title: "Booking Website",
-      desc: "Appointment and booking platform with calendar integration and automated notifications.",
-      tags: ["PHP", "jQuery", "Bootstrap"],
-      cat: "frontend",
-    },
-    {
-      emoji: "📚",
-      title: "Educational Platform",
-      desc: "Interactive educational platform with video lessons, progress tracking, and certifications.",
-      tags: ["WordPress", "PHP", "JS"],
-      cat: "wordpress",
-    },
-    {
-      emoji: "🏢",
-      title: "Corporate Website",
-      desc: "Professional corporate website with modern design, animations, and CMS integration.",
-      tags: ["WordPress", "Elementor", "SEO"],
-      cat: "wordpress",
+      link: "https://example.com",
     },
   ];
+
+  /* =========================
+   LOAD PROJECTS
+========================= */
+
   const pGrid = $("#projects-grid");
+
   projects.forEach((p, i) => {
-    const colors = [
-      "linear-gradient(135deg,rgba(0,212,255,0.1),rgba(123,47,255,0.1))",
-      "linear-gradient(135deg,rgba(123,47,255,0.1),rgba(255,45,120,0.1))",
-      "linear-gradient(135deg,rgba(255,45,120,0.1),rgba(0,212,255,0.1))",
-    ];
-    const bg = colors[i % 3];
-    pGrid.append(`<div class="col-sm-6 col-lg-4 project-item" data-cat="${p.cat}" data-aos="fade-up" data-aos-delay="${(i % 3) * 70}">
-    <div class="glass-card project-card h-100">
-      <div class="project-img" style="background:${bg}">
-        <span style="font-size:3.5rem">${p.emoji}</span>
-        <div class="project-overlay">
+    pGrid.append(`
+
+    <div class="col-md-6 col-lg-4 project-item" 
+         data-cat="${p.cat}" 
+         data-aos="fade-up"
+         data-aos-delay="${i * 80}">
+
+      <a href="${p.link}" 
+         target="_blank" 
+         class="project-card">
+
+        <div class="project-img">
+
+          <img src="${p.image}" alt="${p.title}">
+
         </div>
-      </div>
-      <div class="project-body">
-        <h5 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.4rem">${p.title}</h5>
-        <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0.8rem">${p.desc}</p>
-        <div class="project-tags">${p.tags.map((t) => `<span class="project-tag">${t}</span>`).join("")}</div>
-      </div>
+
+        <div class="project-body">
+
+          <h5>${p.title}</h5>
+
+          <p>${p.desc}</p>
+
+          <div class="project-tags">
+
+            ${p.tags
+              .map(
+                (tag) => `
+              <span class="project-tag">
+                ${tag}
+              </span>
+            `,
+              )
+              .join("")}
+
+          </div>
+
+        </div>
+
+      </a>
+
     </div>
-  </div>`);
+
+  `);
   });
 
-  /* Project filter */
+  /* =========================
+   FILTER PROJECTS
+========================= */
+
   $(document).on("click", ".filter-btn", function () {
     $(".filter-btn").removeClass("active");
+
     $(this).addClass("active");
-    const f = $(this).data("filter");
-    if (f === "all") {
-      $(".project-item").show();
+
+    const filter = $(this).data("filter");
+
+    if (filter === "all") {
+      $(".project-item").fadeIn();
     } else {
-      $(".project-item")
-        .hide()
-        .filter('[data-cat="' + f + '"]')
-        .show();
+      $(".project-item").hide();
+
+      $('.project-item[data-cat="' + filter + '"]').fadeIn();
     }
   });
 
