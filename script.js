@@ -436,12 +436,12 @@ $(function () {
 
   const projects = [
     {
-      image: "images/lms.jpg",
-      title: "LMS Website",
-      desc: "Feature-rich Learning Management System with courses, quizzes, and student dashboards.",
-      tags: ["WordPress", "LearnDash", "PHP"],
-      cat: "wordpress",
-      link: "https://example.com",
+      image: "images/Forbes.webp",
+      title: "Forbes",
+      desc: "Professional business and financial media platform delivering market insights, industry news, and corporate updates.",
+      tags: ["HTML", "CSS", "JAVASCRIPT"],
+      cat: "frontend",
+      link: "https://projects.synergynexa.com/forbes/",
     },
 
     {
