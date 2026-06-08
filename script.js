@@ -574,6 +574,30 @@ $(function () {
       cat: ["ecommerce", "shopify"],
       link: "https://labelramp.com/",
     },
+    {
+      image: "images/covercanvas.webp",
+      title: "Cover Canvas",
+      desc: "Professional HR solutions website built with custom PHP, offering recruitment services, workforce management, and streamlined talent acquisition solutions.",
+      tags: ["Custom PHP", "Design"],
+      cat: ["php", "frontend"],
+      link: "https://covercanvas.in/",
+    },
+    {
+      image: "images/flyluxevip.webp",
+      title: "FLY Luxevip",
+      desc: "Custom PHP airport service booking platform offering seamless reservations, passenger assistance, and efficient travel management solutions.",
+      tags: ["Custom PHP", "Design"],
+      cat: ["php", "frontend"],
+      link: "https://flyluxevip.com/",
+    },
+    {
+      image: "images/resumedost.webp",
+      title: "Resumedost",
+      desc: "Modern resume builder website enabling users to create professional resumes, customize templates, and download job-ready CVs with ease.",
+      tags: ["Custom PHP", "Design"],
+      cat: ["php", "frontend"],
+      link: "https://resumedost.com/",
+    },
   ];
 
   /* =========================
