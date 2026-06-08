@@ -429,7 +429,6 @@ $(function () {
   </div>`);
   });
 
-  /* ---- Projects data ---- */
   /* =========================
    PROJECT DATA
 ========================= */
@@ -550,6 +549,30 @@ $(function () {
       ],
       cat: ["wordpress", "woocommerce"],
       link: "https://caslay.in/",
+    },
+    {
+      image: "images/wanderernirvana.webp",
+      title: "Wander Ernirvana",
+      desc: "Custom Shopify eCommerce store specializing in personalized bracelets, keyrings, and unique gift products with an interactive shopping experience.",
+      tags: ["Eommerce", "Design", "Speed Optimization"],
+      cat: ["ecommerce", "shopify"],
+      link: "https://wanderernirvana.in/",
+    },
+    {
+      image: "images/drishyaindia.webp",
+      title: "Drishya India",
+      desc: "Trendy Shopify fashion eCommerce store showcasing stylish apparel, modern collections, and a seamless online shopping experience.",
+      tags: ["Eommerce", "Design", "Speed Optimization"],
+      cat: ["ecommerce", "shopify"],
+      link: "https://drishyaindia.com/",
+    },
+    {
+      image: "images/labelramp.webp",
+      title: "Label RAMP",
+      desc: "Stylish Shopify fashion eCommerce store featuring trendy women's apparel, chic collections, and a seamless online shopping experience.",
+      tags: ["Eommerce", "Design", "Speed Optimization"],
+      cat: ["ecommerce", "shopify"],
+      link: "https://labelramp.com/",
     },
   ];
 
