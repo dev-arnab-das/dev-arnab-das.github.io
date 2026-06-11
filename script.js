@@ -657,21 +657,29 @@ $(function () {
    FILTER PROJECTS
 ========================= */
 
-  $(".filter-btn").click(function () {
-    $(".filter-btn").removeClass("active");
-    $(this).addClass("active");
-
-    const filter = $(this).data("filter");
+  function filterProjects(filter) {
+    $(".project-item").hide();
 
     $(".project-item").each(function () {
       const categories = $(this).data("cat").split(" ");
 
-      if (filter === "all" || categories.includes(filter)) {
-        $(this).show();
-      } else {
-        $(this).hide();
+      if (categories.includes(filter)) {
+        $(this).fadeIn(200);
       }
     });
+
+    setTimeout(() => {
+      AOS.refreshHard();
+    }, 100);
+  }
+
+  filterProjects("wordpress");
+
+  $(".filter-btn").on("click", function () {
+    $(".filter-btn").removeClass("active");
+    $(this).addClass("active");
+
+    filterProjects($(this).data("filter"));
   });
 
   /* ---- Why choose me ---- */
