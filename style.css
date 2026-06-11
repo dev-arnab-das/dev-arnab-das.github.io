@@ -1179,14 +1179,6 @@ section {
   font-size: 0.8rem;
   color: var(--text-secondary);
 }
-/* Testimonial slider dots */
-
-.testimonial-dots {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  margin-top: 2rem;
-}
 
 .dot {
   width: 8px;
